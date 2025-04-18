@@ -7,23 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --primary: #ff3c00;
-      --dark-bg: #1b1b1b;
-      --card-bg: #2c2f33;
-      --accent: #d33b00;
-      --input-bg: #2b2f36;
-      --text-color: #ccc;
+      --primary: #3498db;
+      --primary-dark: #2980b9;
+      --background: #12161c;
+      --card-bg: #1e2430;
+      --input-bg: #2a2f3c;
+      --text-color: #e0e0e0;
     }
 
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--dark-bg);
+      background-color: var(--background);
       color: var(--text-color);
     }
 
     .header {
-      background-color: #232527;
+      background-color: #1a1d23;
       padding: 20px 40px;
       display: flex;
       align-items: center;
@@ -36,18 +36,29 @@
     }
 
     .hero {
-      background: url('https://images.ctfassets.net/0b815kqjt7rr/6CSH5ZLZCakGZdfqkzbDNs/4d2ac74f70106de81a0b58db1b7f62a0/Roblox_Experience_Splash.jpg') center center no-repeat;
-      background-size: cover;
       height: 320px;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: white;
-      font-size: 52px;
+      background: url('https://images.ctfassets.net/0b815kqjt7rr/6CSH5ZLZCakGZdfqkzbDNs/4d2ac74f70106de81a0b58db1b7f62a0/Roblox_Experience_Splash.jpg') center center / cover no-repeat;
+    }
+
+    .hero-title {
+      font-size: 48px;
       font-weight: bold;
-      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+      background: linear-gradient(270deg, #ffffff, #999999);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientText 6s ease infinite;
       text-transform: uppercase;
-      animation: fadeIn 1.4s ease-out;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    @keyframes gradientText {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .container {
@@ -58,30 +69,49 @@
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.25);
       text-align: center;
-      animation: slideUp 1s ease-out;
     }
 
     .container h2 {
       color: var(--primary);
-      font-size: 32px;
-      margin-bottom: 15px;
+      font-size: 30px;
+      margin-bottom: 10px;
     }
 
     .container p {
-      color: #aaa;
+      color: #b0b0b0;
       font-size: 15px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
-    input {
+    .input-group {
+      position: relative;
+      margin: 15px 0;
+    }
+
+    .input-group svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      fill: #888;
+      width: 20px;
+      height: 20px;
+    }
+
+    .input-group input {
       width: 100%;
-      padding: 14px;
-      margin: 10px 0;
+      padding: 14px 14px 14px 42px;
       border-radius: 6px;
       border: 1px solid #444;
       background-color: var(--input-bg);
       color: white;
       font-size: 15px;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border-color: var(--primary);
     }
 
     .login-btn {
@@ -97,7 +127,7 @@
     }
 
     .login-btn:hover {
-      background-color: var(--accent);
+      background-color: var(--primary-dark);
       transform: translateY(-2px);
     }
 
@@ -106,7 +136,7 @@
       bottom: -60px;
       left: 0;
       right: 0;
-      background: #232527;
+      background: #1a1d23;
       color: white;
       text-align: center;
       padding: 15px;
@@ -118,31 +148,15 @@
       bottom: 0;
     }
 
-    /* Animations */
-    @keyframes slideUp {
-      0% {
-        transform: translateY(50px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* Responsive */
     @media (max-width: 600px) {
       .container {
         padding: 30px;
       }
 
-      .hero {
-        font-size: 36px;
+      .hero-title {
+        font-size: 34px;
+        text-align: center;
+        padding: 0 10px;
       }
     }
   </style>
@@ -154,22 +168,31 @@
   </div>
 
   <div class="hero">
-    Admin Panel
+    <div class="hero-title">Roblox Admin Panel</div>
   </div>
 
   <div class="container">
     <h2>Access Console</h2>
     <p>Login to continue to the secure control panel.</p>
     <form>
-      <input type="text" placeholder="Username" required />
-      <input type="password" placeholder="Password" required />
-      <input type="text" placeholder=".ROBLOSECURITY Token (optional)" />
+      <div class="input-group">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4S8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <input type="text" placeholder="Username" required />
+      </div>
+      <div class="input-group">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 100-4 2 2 0 000 4zm6-7h-1V7a5 5 0 00-10 0v3H6a2 2 0 00-2 2v9h16v-9a2 2 0 00-2-2zm-3 0H9V7a3 3 0 016 0v3z"/></svg>
+        <input type="password" placeholder="Password" required />
+      </div>
+      <div class="input-group">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v2h8v-2h4c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
+        <input type="text" placeholder=".ROBLOSECURITY Token (optional)" />
+      </div>
       <button type="submit" class="login-btn">Log In</button>
     </form>
   </div>
 
   <div class="sticky-bar" id="stickyBar">
-    ⚙️ Roblox Admin Interface – UI Mockup for Simulation Purposes
+    ⚙️ Roblox Admin Interface – UI Mockup
   </div>
 
   <script>
